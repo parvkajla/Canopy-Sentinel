@@ -18,7 +18,8 @@
         <ImageView
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:src="@drawable/ic_forest"
+            android:src="@drawable/canopy_logo"
+            android:layout_marginStart="52dp"
             app:tint="@color/primary"
             android:contentDescription="@string/app_name"/>
 
@@ -32,4 +33,4 @@
 
     </LinearLayout>
 
-</com.google.android.material.appbar.MaterialToolbar> 
+</com.google.android.material.appbar.MaterialToolbar>

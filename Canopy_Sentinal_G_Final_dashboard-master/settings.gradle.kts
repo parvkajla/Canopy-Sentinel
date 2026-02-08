@@ -9,6 +9,8 @@ pluginManagement {
         }
         mavenCentral()
         gradlePluginPortal()
+        // Optional: Some plugins might also be on JitPack
+        maven { url = uri("https://jitpack.io") }
     }
 }
 dependencyResolutionManagement {
@@ -16,9 +18,10 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        // Essential: This allows the app to find MPAndroidChart
+        maven { url = uri("https://jitpack.io") }
     }
 }
 
 rootProject.name = "Canopy Sentinal G"
 include(":app")
- 

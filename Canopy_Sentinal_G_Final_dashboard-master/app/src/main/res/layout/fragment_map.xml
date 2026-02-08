@@ -19,8 +19,9 @@
         android:id="@+id/cardTimeSlider"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:cardCornerRadius="12dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="80dp"
+        app:cardCornerRadius="16dp"
         app:cardElevation="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,7 +39,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Vegetation History (Months)"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="@color/primary"/>
 
             <com.google.android.material.slider.Slider
                 android:id="@+id/timeSlider"
@@ -47,7 +49,9 @@
                 android:stepSize="1.0"
                 android:value="1.0"
                 android:valueFrom="0.0"
-                android:valueTo="5.0" />
+                android:valueTo="5.0"
+                app:thumbColor="@color/primary"
+                app:trackColorActive="@color/primary" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 

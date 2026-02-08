@@ -1,5 +1,6 @@
 package com.erc.canopysentinalg.ui.map
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.preference.PreferenceManager
 import com.erc.canopysentinalg.data.model.Country
 import com.erc.canopysentinalg.databinding.FragmentMapBinding
+import com.erc.canopysentinalg.ui.auth.GroundTruthActivity
 import com.erc.canopysentinalg.ui.viewmodel.ForestViewModel
 import org.osmdroid.config.Configuration
 import org.osmdroid.util.GeoPoint
@@ -27,12 +29,9 @@ class MapFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // 1. Initialize osmdroid configuration
         val context = requireContext().applicationContext
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
         Configuration.getInstance().load(context, prefs)
-
-        // 2. Set User Agent (Prevents "Blank Map" issues)
         Configuration.getInstance().userAgentValue = context.packageName
 
         _binding = FragmentMapBinding.inflate(inflater, container, false)
@@ -51,14 +50,15 @@ class MapFragment : Fragment() {
         binding.map.apply {
             setMultiTouchControls(true)
             controller.setZoom(4.0)
-            // Center on Amazon (Brazil) coordinates
             controller.setCenter(GeoPoint(-14.2350, -51.9253))
         }
     }
 
     private fun setupUIListeners() {
-        binding.timeSlider.addOnChangeListener { _, _, _ ->
-            updateMapPolygons()
+        binding.timeSlider.addOnChangeListener { _, value, _ ->
+            val monthsAgo = value.toInt()
+            binding.timeRangeLabel.text = "Vegetation History: $monthsAgo Months Ago"
+            viewModel.loadHistoricalStats(monthsAgo)
         }
     }
 
@@ -67,9 +67,14 @@ class MapFragment : Fragment() {
             updateMapPolygons()
         }
 
+        viewModel.forestStats.observe(viewLifecycleOwner) {
+            updateMapPolygons()
+        }
+
         viewModel.selectedCountry.observe(viewLifecycleOwner) { country ->
             country?.let {
-                binding.map.controller.animateTo(GeoPoint(it.latitude, it.longitude))
+                val targetLocation = GeoPoint(it.latitude, it.longitude)
+                binding.map.controller.animateTo(targetLocation)
                 binding.map.controller.setZoom(6.0)
             }
         }
@@ -78,18 +83,21 @@ class MapFragment : Fragment() {
     private fun updateMapPolygons() {
         binding.map.overlays.clear()
         val countries = viewModel.countries.value ?: return
+        val currentStats = viewModel.forestStats.value
 
         countries.forEach { country ->
-            drawCountryHealthBox(country)
-        }
+            val healthToShow = if (country.code == viewModel.selectedCountry.value?.code) {
+                currentStats?.forestHealthPercentage ?: country.forestHealthPercentage
+            } else {
+                country.forestHealthPercentage
+            }
 
+            drawCountryHealthBox(country, healthToShow)
+        }
         binding.map.invalidate()
     }
 
-    private fun drawCountryHealthBox(country: Country) {
-        val health = country.forestHealthPercentage
-
-        // AI Color Logic: Green (Healthy), Yellow (Warning), Red (Critical)
+    private fun drawCountryHealthBox(country: Country, health: Double) {
         val color = when {
             health > 80 -> Color.argb(120, 0, 255, 0)
             health > 60 -> Color.argb(120, 255, 255, 0)
@@ -110,8 +118,17 @@ class MapFragment : Fragment() {
             outlinePaint.color = Color.BLACK
             outlinePaint.strokeWidth = 2f
             title = "${country.name}: ${health.toInt()}% Health"
-        }
 
+            // Trigger AR Ground Truth Activity on Click
+            setOnClickListener { _, _, _ ->
+                val intent = Intent(requireContext(), GroundTruthActivity::class.java).apply {
+                    putExtra("EXTRA_NAME", country.name)
+                    putExtra("EXTRA_HEALTH", health)
+                }
+                startActivity(intent)
+                true
+            }
+        }
         binding.map.overlays.add(polygon)
     }
 
