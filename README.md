@@ -62,3 +62,13 @@ app/src/main/java/com/erc/canopysentinalg/
 │   ├── analytics/     # Charting and PDF report generation
 │   └── viewmodel/     # Business logic controllers (ForestViewModel)
 └── MainActivity.kt    # Main navigation host
+
+---
+
+## 👥 Contributors
+
+* **Parv Kajla** ([@parvkajla](https://github.com/parvkajla)) -  Map & AnalyticsIntegration
+* **Pari Rastogi** ([@parirastogi](https://github.com/parirastogi)) - UI/UX Designer 
+* **Vayu Nandan Tripathi** ([@VayuTripathi09](https://github.com/VayuTripathi09)) - Lead Android Developer
+
+---
