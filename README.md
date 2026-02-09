@@ -73,6 +73,7 @@ app/src/main/java/com/erc/canopysentinalg/
 | <img src="https://github.com/parirastogi.png" width="50px;"/> | **Pari Rastogi** | UI/UX Designer | [@parirastogi](https://github.com/parirastogi) |
 | <img src="https://github.com/VayuTripathi09.png" width="50px;"/> | **Vayu Nandan Tripathi** | Lead Android Developer | [@VayuTripathi09](https://github.com/VayuTripathi09) |
 
+---
 
 
 
