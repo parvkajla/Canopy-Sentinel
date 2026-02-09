@@ -64,7 +64,6 @@ app/src/main/java/com/erc/canopysentinalg/
 └── MainActivity.kt    # Main navigation host
 
 ---
----
 
 ## 👥 Meet the Team
 
@@ -75,4 +74,5 @@ app/src/main/java/com/erc/canopysentinalg/
 | <img src="https://github.com/VayuTripathi09.png" width="50px;"/> | **Vayu Nandan Tripathi** | Lead Android Developer | [@VayuTripathi09](https://github.com/VayuTripathi09) |
 
 ---
+
 
