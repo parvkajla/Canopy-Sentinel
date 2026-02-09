@@ -64,11 +64,15 @@ app/src/main/java/com/erc/canopysentinalg/
 └── MainActivity.kt    # Main navigation host
 
 ---
+---
 
-## 👥 Contributors
+## 👥 Meet the Team
 
-* **Parv Kajla** ([@parvkajla](https://github.com/parvkajla)) -  Map & AnalyticsIntegration
-* **Pari Rastogi** ([@parirastogi](https://github.com/parirastogi)) - UI/UX Designer 
-* **Vayu Nandan Tripathi** ([@VayuTripathi09](https://github.com/VayuTripathi09)) - Lead Android Developer
+| Profile | Name | Role | GitHub |
+| :---: | :--- | :--- | :---: |
+| <img src="https://github.com/parvkajla.png" width="50px;"/> | **Parv Kajla** | Analytics & Map Integration | [@parvkajla](https://github.com/parvkajla) |
+| <img src="https://github.com/parirastogi.png" width="50px;"/> | **Pari Rastogi** | UI/UX Designer | [@parirastogi](https://github.com/parirastogi) |
+| <img src="https://github.com/VayuTripathi09.png" width="50px;"/> | **Vayu Nandan Tripathi** | Lead Android Developer | [@VayuTripathi09](https://github.com/VayuTripathi09) |
 
 ---
+
